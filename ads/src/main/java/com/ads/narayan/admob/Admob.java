@@ -1280,6 +1280,7 @@ public class Admob {
             adView.setAdListener(new AdListener() {
                 @Override
                 public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                    Log.e("CHECKBANNER", "loadBanner: loading error=>"+loadAdError.getMessage());
                     containerShimmer.stopShimmer();
                     adContainer.setVisibility(View.GONE);
                     containerShimmer.setVisibility(View.GONE);
