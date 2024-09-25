@@ -1,0 +1,152 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
+
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 9
+        versionName "1.1.3"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        productFlavors {
+
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        appDev {
+            //use id test when dev
+            manifestPlaceholders = [ ad_app_id:"ca-app-pub-3940256099942544~3347511713"]
+            buildConfigField "String", "ad_interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_interstitial", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_banner", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ad_reward", "\"ca-app-pub-3940256099942544/5224354917\""
+            buildConfigField "String", "ad_reward_inter", "\"ca-app-pub-3940256099942544/5354046379\""
+            buildConfigField "String", "ad_appopen_resume", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ad_native", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ads_open_app", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ads_inter_priority", "\"ca-app-pub-3940256099942544/8691691433\""
+            buildConfigField "Boolean", "env_dev", "true"
+            buildConfigField "String", "ad_native_priority", "\"ca-app-pub-3940256099942544/1044960115\""
+            buildConfigField "String", "ads_inter_medium", "\"ca-app-pub-3940256099942544/8691691433\""
+            buildConfigField "String", "ad_native_medium", "\"ca-app-pub-3940256099942544/1044960115\""
+
+        }
+        appProd {
+            //add your id ad here
+            manifestPlaceholders = [ ad_app_id:"ca-app-pub-3940256099942544~3347511713"]
+            buildConfigField "String", "ad_interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_interstitial", "\"ca-app-pub-3940256099942544/1033173712\""
+
+            buildConfigField "String", "ad_banner", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ad_reward", "\"ca-app-pub-3940256099942544/5224354917\""
+            buildConfigField "String", "ad_reward_inter", "\"ca-app-pub-3940256099942544/5354046379\""
+            buildConfigField "String", "ad_appopen_resume", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ad_native", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ads_open_app", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ads_inter_priority", "\"ca-app-pub-3940256099942544/8691691433\""
+            buildConfigField "String", "ads_inter_medium", "\"ca-app-pub-3940256099942544/8691691433\""
+            buildConfigField "String", "ad_native_medium", "\"ca-app-pub-3940256099942544/1044960115\""
+            buildConfigField "String", "ad_native_priority", "\"ca-app-pub-3940256099942544/1044960115\""
+            buildConfigField "Boolean", "env_dev", "false"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+}
+
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-process:2.6.2'
+
+    //admob
+//    implementation 'com.google.android.gms:play-services-ads:22.3.0'
+    implementation 'com.google.android.gms:play-services-ads:23.0.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+    //mediation admob
+    implementation 'com.google.ads.mediation:facebook:6.16.0.0'
+    implementation 'com.google.ads.mediation:adcolony:4.8.0.0'
+    implementation 'com.google.ads.mediation:applovin:11.11.3.0'
+    implementation 'com.google.ads.mediation:vungle:6.12.1.0'
+
+
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    implementation 'com.google.firebase:firebase-analytics:21.3.0'
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
+//    def billing_version = "6.0.1"
+//    implementation "com.android.billingclient:billing:$billing_version"
+    implementation "com.google.guava:guava:27.1-android"
+    //adjust
+    implementation 'com.adjust.sdk:adjust-android:4.33.1'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
+
+    implementation 'com.google.android.gms:play-services-appset:16.0.2'
+    implementation 'com.google.android.gms:play-services-basement:18.2.0'
+    //implementation "androidx.core:core-ktx:1.3.2"
+    implementation 'androidx.core:core-ktx:1.10.1'
+    //implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.2"
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //fb sdk
+    implementation 'com.facebook.android:facebook-android-sdk:16.0.0'
+
+    implementation 'com.airbnb.android:lottie:5.0.2'
+
+    // applovin
+    implementation 'com.applovin:applovin-sdk:11.11.3'
+
+    // appsflyer
+    implementation 'com.appsflyer:af-android-sdk:6.8.2'
+    implementation 'com.appsflyer:adrevenue:6.4.3'
+
+    implementation "com.android.billingclient:billing-ktx:7.0.0"
+
+}
+
+afterEvaluate {
+    println(components*.name)
+    publishing {
+        publications {
+            appProdRelease(MavenPublication) {
+                from components.appProdRelease
+                groupId = 'com.github.Ashwani-dev123'
+                artifactId = 'NarayanAds'
+                version = '1.0.7'
+            }
+        }
+    }
+}
+
+
