@@ -1255,6 +1255,7 @@ public class Admob {
         if (Arrays.asList(mActivity.getResources().getStringArray(R.array.list_id_test)).contains(id)) {
             showTestIdAlert(mActivity, BANNER_ADS, id);
         }
+        Log.e("CHECKBANNER", "loadBanner: isPurchase=>"+AppPurchase.getInstance().isPurchased(mActivity) );
         if (AppPurchase.getInstance().isPurchased(mActivity)) {
             containerShimmer.setVisibility(View.GONE);
             return;
